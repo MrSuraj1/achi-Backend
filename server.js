@@ -16,7 +16,8 @@ dotenv.config();
 app.use(cors({
   origin: [
     "https://achiforntend.netlify.app",
-    "https://achintcreations.com"
+    "https://achintcreations.com",
+     "http://localhost:5173"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
