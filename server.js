@@ -14,7 +14,11 @@ const app = express();
 
 dotenv.config();
 app.use(cors({
-  origin: process.env.FRONTEND_URL, // e.g. https://achi-frontend.netlify.app
+  origin: [
+    "https://achiforntend.netlify.app",
+    "https://achintcreations.com"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 app.use(express.json());
