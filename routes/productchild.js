@@ -23,4 +23,27 @@ productchild.get("/:id", async (req, res) => {
   }
 });
 
+
+productchild.post('/add' , async (req,res)=>{
+  const [ product,price,star,description,image,image1,image2,image3 ] = req.body;
+   try {
+   const newProduct = new product({
+    productId: Date.now(),
+      name: product,
+      price,
+      star,
+      description,
+      image,
+      image1,
+      image2,
+      image3,
+   });
+   await newProduct.save();
+   res.status(200).json({message  : 'product add'})
+   }catch(err){
+    console.log(err);
+   }
+});
+
+
 module.exports = productchild;
