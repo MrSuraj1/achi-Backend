@@ -24,10 +24,15 @@ productchild.get("/:id", async (req, res) => {
 });
 
 
-productchild.get("/add", async (req, res) => {
-  const { product, price, star, description, image, image1, image2, image3 } = req.body;
 
+productchild.post('/add', async (req, res) => {
   try {
+    const { product, price, star, description, image, image1, image2, image3 } = req.body;
+
+    if (!product || !price) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
     const newProduct = new Product({
       productId: Date.now(),
       name: product,
@@ -41,10 +46,10 @@ productchild.get("/add", async (req, res) => {
     });
 
     await newProduct.save();
-    res.status(200).json({ message: "Product added successfully!" });
+    res.status(200).json({ message: 'Product added successfully', product: newProduct });
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Error saving product" });
+    console.error("Error adding product:", err);
+    res.status(500).json({ message: "Error adding product", error: err.message });
   }
 });
 
