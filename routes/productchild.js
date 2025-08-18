@@ -24,11 +24,12 @@ productchild.get("/:id", async (req, res) => {
 });
 
 
-productchild.post('/add' , async (req,res)=>{
-  const [ product,price,star,description,image,image1,image2,image3 ] = req.body;
-   try {
-   const newProduct = new product({
-    productId: Date.now(),
+productchild.post("/add", async (req, res) => {
+  const { product, price, star, description, image, image1, image2, image3 } = req.body;
+
+  try {
+    const newProduct = new Product({
+      productId: Date.now(),
       name: product,
       price,
       star,
@@ -37,13 +38,14 @@ productchild.post('/add' , async (req,res)=>{
       image1,
       image2,
       image3,
-   });
-   await newProduct.save();
-   res.status(200).json({message  : 'product add'})
-   }catch(err){
-    console.log(err);
-   }
-});
+    });
 
+    await newProduct.save();
+    res.status(200).json({ message: "Product added successfully!" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Error saving product" });
+  }
+});
 
 module.exports = productchild;
