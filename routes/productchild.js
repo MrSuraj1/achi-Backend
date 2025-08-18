@@ -24,7 +24,7 @@ productchild.get("/:id", async (req, res) => {
 });
 
 
-productchild.post("/add", async (req, res) => {
+productchild.get("/add", async (req, res) => {
   const { product, price, star, description, image, image1, image2, image3 } = req.body;
 
   try {
